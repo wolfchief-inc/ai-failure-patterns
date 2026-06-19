@@ -1,0 +1,3 @@
+# スキルのセルフテストで注入役が書き出す答えファイル（採点役の盲検を保つため追跡しない）
+.skill-eval-answer.md
+skill-eval-answer.md

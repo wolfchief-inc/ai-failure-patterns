@@ -44,4 +44,5 @@ Skill が混入したパターン名と該当節を開示
 - `docs/pattern-flowchart.md` — 受講者向けのパターン同定フローチャート
 - `docs/review-worksheet.md` — 受講者向けのレビュー記入ワークシート
 - `docs/facilitator-guide.md` — 講師向けの運用ガイド
+- `docs/skill-self-test.md` — メンテナ向けのスキル盲検セルフテスト手順
 - `exercises/` — 任意の回答記録置き場
