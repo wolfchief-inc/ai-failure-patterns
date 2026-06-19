@@ -34,11 +34,14 @@ Skill が混入したパターン名と該当節を開示
 3. 普通のプロンプトでJava実装を依頼する（例: `Spring Boot で社内向けのユーザー登録APIを作って`）
 4. 出力されたコードと説明をレビューする
 5. 「これは○○パターンだと思う、修正方針はこう」とメモする
-6. `reveal` と返すと答え合わせが出る
+6. 行き詰まったら `ヒント` と返す。答えは伏せたまま、見る場所→問い→振れている評価軸の順に段階的に手伝う（「もっと」で次の段へ）
+7. `reveal` と返すと答え合わせが出る
 
 ## ディレクトリ
 
 - `.claude/skills/failure-injecting-coder/` — スキル本体・パターン定義・Few-shot例・reveal テンプレ
 - `docs/pattern-catalog.md` — 受講者向けの16パターン簡易カタログ
+- `docs/pattern-flowchart.md` — 受講者向けのパターン同定フローチャート
+- `docs/review-worksheet.md` — 受講者向けのレビュー記入ワークシート
 - `docs/facilitator-guide.md` — 講師向けの運用ガイド
 - `exercises/` — 任意の回答記録置き場
