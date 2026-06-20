@@ -120,3 +120,7 @@ jq -r 'select(.type=="assistant") | .message.content[]? | select(.type=="tool_us
 ## 起動の仕方
 
 このリポジトリで Claude Code に「`docs/skill-self-test.md` の手順でスキルのセルフテストを1問回して」と頼めば、上記の役を順に起動して採点まで進む。
+
+## 16パターン一括版
+
+全パターンを自動で回すには `Workflow({name:'skill-self-test-all'})`（本体は `.claude/workflows/skill-self-test-all.js`）。各パターンを演習モードで1問ずつ混入し、ツール禁止の盲検レビュー役（sonnet）が同定、結果を `docs/self-test-results.md` に表で書き出す。レビュー役は詰まれば L1→L3 を1段ずつ受け取る。

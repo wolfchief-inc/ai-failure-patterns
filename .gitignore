@@ -2,3 +2,7 @@
 .skill-eval-answer.md
 skill-eval-answer.md
 .skill-eval-review-log.md
+
+# セルフテストの実行結果（実行のたびに変わるローカル出力。コミットしない）
+docs/self-test-results.md
+docs/self-test-results-recheck.md
