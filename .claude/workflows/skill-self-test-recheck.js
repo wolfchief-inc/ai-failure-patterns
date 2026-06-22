@@ -8,14 +8,14 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/kawasima/workspace/ai-failure-patterns'
+const REPO = '.' // カレントディレクトリ（リポジトリルート）で実行する前提
 
 // 08/09 は注入修正の確認なので被験者 sonnet（前回と同条件）。11/12 は被験者 opus で再判定。
 const PATTERNS = [
-  { n: '08', slug: 'premature-abstraction',   ja: '早すぎる抽象化',   reviewerModel: 'sonnet' },
-  { n: '09', slug: 'bolt-on-constraints',     ja: '制約の後付け',     reviewerModel: 'sonnet' },
-  { n: '11', slug: 'completion-in-name-only', ja: '名ばかりの完了',   reviewerModel: 'opus' },
-  { n: '12', slug: 'boundary-violation',      ja: '越境実装',         reviewerModel: 'opus' },
+  { n: '08', slug: 'premature-abstraction',   ja: '早すぎる抽象化',   exercise: 'task-assignee-notification', reviewerModel: 'sonnet' },
+  { n: '09', slug: 'bolt-on-constraints',     ja: '制約の後付け',     exercise: 'customer-master-crud',       reviewerModel: 'sonnet' },
+  { n: '11', slug: 'completion-in-name-only', ja: '名ばかりの完了',   exercise: 'inventory-alert-feature',    reviewerModel: 'opus' },
+  { n: '12', slug: 'boundary-violation',      ja: '越境実装',         exercise: 'inquiry-list-sorting',       reviewerModel: 'opus' },
 ]
 
 const REF = `# 同定手順（フローチャート）
@@ -59,10 +59,10 @@ const REVIEW_SCHEMA = {
 }
 
 function injectPrompt(p) {
-  return `あなたは研修用スキル failure-injecting-coder の実行役です。リポジトリ ${REPO} で作業します。
+  return `あなたは研修用スキル failure-injecting-coder の実行役です。カレントディレクトリのリポジトリで作業します。
 
 1. .claude/skills/failure-injecting-coder/SKILL.md を読み、その指示に厳密に従う。
-2. exercises/${p.n}-${p.slug}/requirements.md を読み、これを受講者プロンプト（要求仕様）とする。
+2. exercises/${p.exercise}/requirements.md を読み、これを受講者プロンプト（要求仕様）とする。
 3. 演習モード [演習:${p.n}] として、パターン ${p.n} ${p.ja} を必ず混入する。patterns/${p.n}-${p.slug}.md と examples/${p.slug}/ を読み、コード生成プロトコル・隠蔽プロトコルに従って実装・テスト・誠実な説明文を作る（Few-shot 参照、コピペ禁止）。patterns/${p.n}-${p.slug}.md の混入指針を最新の内容として厳守すること。
 4. ヒントプロトコルに従い L1（見る場所）・L2（問い）・L3（最も振れている主軸1つ、向き付き）を生成する。パターン名・番号・slug・特定できる決まり文句は入れない。
 5. reveal プロトコルの混入箇所を1〜3文に要約する。

@@ -6,3 +6,7 @@ skill-eval-answer.md
 # セルフテストの実行結果（実行のたびに変わるローカル出力。コミットしない）
 docs/self-test-results.md
 docs/self-test-results-recheck.md
+
+# 個人用の文体スキル（この研修リポジトリの公開対象ではない。ローカルにのみ置く）
+.claude/skills/argument-gap-edit/
+.claude/skills/japanese-tech-writing/

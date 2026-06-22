@@ -37,12 +37,14 @@ Skill が混入したパターン名と該当節を開示
 6. 行き詰まったら `ヒント` と返す。答えは伏せたまま、見る場所→問い→振れている評価軸の順に段階的に手伝う（「もっと」で次の段へ）
 7. `reveal` と返すと答え合わせが出る
 
+講師から課題番号を指定されたときの始め方・進め方は [docs/exercise-guide.md](docs/exercise-guide.md) にまとめてある。
+
 ## ディレクトリ
 
 - `.claude/skills/failure-injecting-coder/` — スキル本体・パターン定義・Few-shot例・reveal テンプレ
+- `docs/exercise-guide.md` — 受講者向けの課題の進め方ガイド
 - `docs/pattern-catalog.md` — 受講者向けの16パターン簡易カタログ
 - `docs/pattern-flowchart.md` — 受講者向けのパターン同定フローチャート
 - `docs/review-worksheet.md` — 受講者向けのレビュー記入ワークシート
-- `docs/facilitator-guide.md` — 講師向けの運用ガイド
 - `docs/skill-self-test.md` — メンテナ向けのスキル盲検セルフテスト手順
-- `exercises/` — 任意の回答記録置き場
+- `exercises/` — 課題シナリオ（題材ごとのフォルダに `requirements.md`。フォルダ名は混入パターンを表さない）

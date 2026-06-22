@@ -8,25 +8,27 @@ export const meta = {
   ],
 }
 
-const REPO = '/Users/kawasima/workspace/ai-failure-patterns'
+const REPO = '.' // カレントディレクトリ（リポジトリルート）で実行する前提
 
+// exercise はシナリオのディレクトリ名（内容ベース。パターン名は漏らさない）。
+// n / slug → exercise の対応はここだけが持つ（requirements.md には答えを書かない）。
 const PATTERNS = [
-  { n: '01', slug: 'wheel-reinvention',       ja: '車輪の再発明' },
-  { n: '02', slug: 'sledgehammer',            ja: '牛刀をもって鶏を割く' },
-  { n: '03', slug: 'ill-fitting-design',      ja: '身の丈に合わない設計' },
-  { n: '04', slug: 'once-bitten',             ja: '羹に懲りて膾を吹く' },
-  { n: '05', slug: 'ad-hoc-fix',              ja: '場当たり対応' },
-  { n: '06', slug: 'premature-success',       ja: '早合点' },
-  { n: '07', slug: 'jumping-the-gun',         ja: '見切り発車' },
-  { n: '08', slug: 'premature-abstraction',   ja: '早すぎる抽象化' },
-  { n: '09', slug: 'bolt-on-constraints',     ja: '制約の後付け' },
-  { n: '10', slug: 'pandering-to-past',       ja: '過去への忖度' },
-  { n: '11', slug: 'completion-in-name-only', ja: '名ばかりの完了' },
-  { n: '12', slug: 'boundary-violation',      ja: '越境実装' },
-  { n: '13', slug: 'right-but-wrong-place',   ja: '郷に従わぬ正論' },
-  { n: '14', slug: 'rebuild-blind',           ja: '隣を見ない再実装' },
-  { n: '15', slug: 'castle-in-sand',          ja: '砂上の依存' },
-  { n: '16', slug: 'counting-chickens',       ja: '取らぬ狸の拡張点' },
+  { n: '01', slug: 'wheel-reinvention',       ja: '車輪の再発明',       exercise: 'login-session-auth' },
+  { n: '02', slug: 'sledgehammer',            ja: '牛刀をもって鶏を割く', exercise: 'expense-csv-import-batch' },
+  { n: '03', slug: 'ill-fitting-design',      ja: '身の丈に合わない設計', exercise: 'reservation-saas-platform' },
+  { n: '04', slug: 'once-bitten',             ja: '羹に懲りて膾を吹く',   exercise: 'product-bulk-update-api' },
+  { n: '05', slug: 'ad-hoc-fix',              ja: '場当たり対応',         exercise: 'order-confirmation-npe' },
+  { n: '06', slug: 'premature-success',       ja: '早合点',               exercise: 'accounting-sync-batch' },
+  { n: '07', slug: 'jumping-the-gun',         ja: '見切り発車',           exercise: 'purchase-request-workflow' },
+  { n: '08', slug: 'premature-abstraction',   ja: '早すぎる抽象化',       exercise: 'task-assignee-notification' },
+  { n: '09', slug: 'bolt-on-constraints',     ja: '制約の後付け',         exercise: 'customer-master-crud' },
+  { n: '10', slug: 'pandering-to-past',       ja: '過去への忖度',         exercise: 'customer-search-api' },
+  { n: '11', slug: 'completion-in-name-only', ja: '名ばかりの完了',       exercise: 'inventory-alert-feature' },
+  { n: '12', slug: 'boundary-violation',      ja: '越境実装',             exercise: 'inquiry-list-sorting' },
+  { n: '13', slug: 'right-but-wrong-place',   ja: '郷に従わぬ正論',       exercise: 'order-memo-feature' },
+  { n: '14', slug: 'rebuild-blind',           ja: '隣を見ない再実装',     exercise: 'travel-request-pdf-export' },
+  { n: '15', slug: 'castle-in-sand',          ja: '砂上の依存',           exercise: 'image-thumbnail-upload' },
+  { n: '16', slug: 'counting-chickens',       ja: '取らぬ狸の拡張点',     exercise: 'announcement-delivery' },
 ]
 
 // レビュー役へ渡す凝縮リファレンス（フローチャート要約＋カタログ抜粋＋隣接の切り分け）
@@ -71,10 +73,10 @@ const REVIEW_SCHEMA = {
 }
 
 function injectPrompt(p) {
-  return `あなたは研修用スキル failure-injecting-coder の実行役です。リポジトリ ${REPO} で作業します。
+  return `あなたは研修用スキル failure-injecting-coder の実行役です。カレントディレクトリのリポジトリで作業します。
 
 1. .claude/skills/failure-injecting-coder/SKILL.md を読み、その指示に厳密に従う。
-2. exercises/${p.n}-${p.slug}/requirements.md を読み、これを受講者プロンプト（要求仕様）とする。
+2. exercises/${p.exercise}/requirements.md を読み、これを受講者プロンプト（要求仕様）とする。
 3. 演習モード [演習:${p.n}] として、パターン ${p.n} ${p.ja} を必ず混入する。patterns/${p.n}-${p.slug}.md と examples/${p.slug}/ を読み、コード生成プロトコル・隠蔽プロトコルに従って実装・テスト・誠実な説明文を作る（Few-shot 参照、コピペ禁止）。
 4. ヒントプロトコルに従い L1（見る場所）・L2（問い）・L3（最も振れている主軸1つ、向き付き）を生成する。パターン名・番号・slug・特定できる決まり文句は入れない。
 5. reveal プロトコルの混入箇所を1〜3文に要約する。
