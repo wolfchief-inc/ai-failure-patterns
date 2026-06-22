@@ -1,5 +1,7 @@
 # AI時代の設計判断力を鍛える：失敗パターンから学ぶ"動く"の先の考え方
 
+[![License: CC BY-SA 4.0](https://img.shields.io/badge/License-CC%20BY--SA%204.0-lightgrey.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
+
 [Decision Quality と設計判断失敗パターン](https://scrapbox.io/kawasima/Decision_Quality_%E3%81%A8%E8%A8%AD%E8%A8%88%E5%88%A4%E6%96%AD%E5%A4%B1%E6%95%97%E3%83%91%E3%82%BF%E3%83%BC%E3%83%B3) に整理された16の設計判断失敗パターンを、Claude Code 上で体感する研修用コンテンツ。
 
 ## 何ができるか
@@ -48,3 +50,9 @@ Skill が混入したパターン名と該当節を開示
 - `docs/review-worksheet.md` — 受講者向けのレビュー記入ワークシート
 - `docs/skill-self-test.md` — メンテナ向けのスキル盲検セルフテスト手順
 - `exercises/` — 課題シナリオ（題材ごとのフォルダに `requirements.md`。フォルダ名は混入パターンを表さない）
+
+## ライセンス
+
+本リポジトリは [CC BY-SA 4.0](LICENSE)（SPDX: `CC-BY-SA-4.0`）で提供する。
+
+© 2026 株式会社ウルフチーフ
