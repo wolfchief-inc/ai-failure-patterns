@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>評価軸トレードオフ・スライダー → ADR</title>
+    <link rel="stylesheet" href="/styles.css" />
+  </head>
+  <body>
+    <main class="layout">
+      <section class="panel">
+        <header class="panel__head">
+          <h1>評価軸トレードオフ・スライダー</h1>
+          <p class="sub">何かを重んじれば、他を諦める。合計は一定（<span id="total">400</span>）。</p>
+        </header>
+
+        <label class="field">
+          <span class="field__label">お題</span>
+          <select id="topic" class="select"></select>
+        </label>
+
+        <div id="sliders" class="sliders"></div>
+
+        <div class="presets">
+          <div class="presets__label">価値観プリセット</div>
+          <div id="presets" class="presets__buttons"></div>
+        </div>
+
+        <div class="actions">
+          <button id="regenerate" class="btn btn--primary">▶ ADR を再生成</button>
+          <span id="status" class="status"></span>
+        </div>
+      </section>
+
+      <section class="output-wrap">
+        <div class="output-head">
+          <span class="output-title">意思決定 → ADR</span>
+          <span id="dominant-badge" class="badge"></span>
+        </div>
+        <article id="output" class="output">
+          <div class="placeholder">
+            左で価値観（評価軸の重みづけ）とお題を決めて<br />「▶ ADR を再生成」を押すと、その価値観に忠実に<br />Claude が会議の議論と ADR を書きます。
+          </div>
+        </article>
+        <footer class="tagline">AIが変わったのではない。変わったのは評価軸である。</footer>
+      </section>
+    </main>
+
+    <script type="module" src="/app.js"></script>
+  </body>
+</html>

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "balanced",
+    "label": "バランス（既定）",
+    "pattern": null,
+    "note": "8軸を均等に。健全な初期状態。だいたい C に落ち着く。",
+    "values": { "purpose": 50, "constraint": 50, "feasibility": 50, "quality": 50, "time": 50, "risk": 50, "coherence": 50, "agreement": 50 }
+  },
+  {
+    "id": "ship-fast",
+    "label": "とにかく早く動かす",
+    "pattern": "jumping-the-gun",
+    "note": "時間効果を支配軸に、品質・リスク・整合性を割り切る。失敗パターン『早合点』の偏りに対応。狙い: A。",
+    "values": { "purpose": 45, "constraint": 40, "feasibility": 55, "quality": 30, "time": 95, "risk": 25, "coherence": 30, "agreement": 80 }
+  },
+  {
+    "id": "audit-first",
+    "label": "監査・コンプラに妥協しない",
+    "pattern": "once-bitten",
+    "note": "リスク・不確実性を支配軸に、過去の承認の再現・証明を要求。失敗パターン『一度噛まれた』のリスク過大評価に対応。狙い: E。",
+    "values": { "purpose": 35, "constraint": 50, "feasibility": 25, "quality": 65, "time": 15, "risk": 90, "coherence": 70, "agreement": 50 }
+  },
+  {
+    "id": "over-engineer",
+    "label": "過剰設計（やりすぎ）",
+    "pattern": "sledgehammer",
+    "note": "整合性・品質・リスクを最大化し、実現可能性・時間を切り捨てる。失敗パターン『大鉈』の偏りに対応。狙い: E（重装備）。",
+    "values": { "purpose": 30, "constraint": 45, "feasibility": 25, "quality": 75, "time": 20, "risk": 75, "coherence": 80, "agreement": 50 }
+  }
+]

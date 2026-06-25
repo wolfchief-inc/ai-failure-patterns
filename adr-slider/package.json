@@ -1,0 +1,14 @@
+{
+  "name": "adr-slider",
+  "version": "0.1.0",
+  "private": true,
+  "description": "トレードオフ・スライダーで評価軸を動かし、Claude に ADR の意思決定をさせるデモ",
+  "type": "module",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "dependencies": {
+    "marked": "^18.0.5",
+    "ws": "^8.21.0"
+  }
+}
