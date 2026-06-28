@@ -6,7 +6,7 @@ import { spawn } from 'node:child_process';
 // onText(text): 回答の text_delta が来るたびに呼ばれる
 // onDone({ ok, code }): 終了時に1回呼ばれる
 // 戻り値: child プロセス（中断したいとき kill する）
-export function runClaude(prompt, { model } = {}, { onText, onStatus, onDone }) {
+export function runClaude(prompt, { model = 'sonnet' } = {}, { onText, onStatus, onDone }) {
   const args = [
     '-p',
     prompt,

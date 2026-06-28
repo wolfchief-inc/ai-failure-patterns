@@ -10,3 +10,7 @@ docs/self-test-results-recheck.md
 # 個人用の文体スキル（この研修リポジトリの公開対象ではない。ローカルにのみ置く）
 .claude/skills/argument-gap-edit/
 .claude/skills/japanese-tech-writing/
+
+# エディタの言語サーバ／リンタのキャッシュ（clojure-lsp・clj-kondo。ローカル生成物）
+.clj-kondo/
+.lsp/

@@ -101,7 +101,8 @@ wss.on('connection', (ws) => {
       await persist(values, topicId);
 
       send({ type: 'reset' });
-      send({ type: 'out', text: `> 価値観: ${sliderSummaryLine(values)}\n\n` });
+      // 価値観行は即座に送られるので prefix 印を付け、モデル本文の開始と区別する
+      send({ type: 'out', text: `> 価値観: ${sliderSummaryLine(values)}\n\n`, prefix: true });
 
       let prompt;
       try {

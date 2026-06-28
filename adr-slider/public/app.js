@@ -18,18 +18,51 @@ const els = {
 // ---- 出力（ストリーミング Markdown） ----
 let acc = '';
 let raf = 0;
+function resultEl() {
+  return els.output.querySelector('#result');
+}
+function mdEl() {
+  return els.output.querySelector('#result-md');
+}
+
+// 生成中インジケーター（評価軸の再配分を模したミントのバー）。
+// done まで結果エリアの末尾に残す。
+const GEN_HTML = `
+  <div class="gen" id="gen" role="status" aria-label="ADR を生成中">
+    <div class="gen__bars">
+      <div class="gen__bar"></div>
+      <div class="gen__bar"></div>
+      <div class="gen__bar"></div>
+      <div class="gen__bar"></div>
+    </div>
+    <div class="gen__label">評価軸を再配分中</div>
+  </div>`;
+
+function scrollToResult() {
+  const smooth = !matchMedia('(prefers-reduced-motion: reduce)').matches;
+  els.output.scrollTo({ top: els.output.scrollHeight, behavior: smooth ? 'smooth' : 'auto' });
+}
+function removeGen() {
+  els.output.querySelector('#gen')?.remove();
+}
+
 function renderOutput() {
   if (raf) return;
   raf = requestAnimationFrame(() => {
     raf = 0;
-    els.output.innerHTML = marked.parse(acc);
+    const m = mdEl();
+    if (m) m.innerHTML = marked.parse(acc);
     els.output.scrollTop = els.output.scrollHeight;
   });
 }
 function resetOutput() {
   acc = '';
-  els.output.innerHTML = '<div class="placeholder">生成中…</div>';
+  const r = resultEl();
+  // Markdown 描画先（#result-md）とインジケーター（#gen）を分け、
+  // ストリーミングで本文を上書きしてもインジケーターが消えないようにする。
+  if (r) r.innerHTML = `<div id="result-md"></div>${GEN_HTML}`;
   els.badge.textContent = '';
+  scrollToResult(); // 押した直後に、結果エリア＝インジケーターが見える位置まで送る
 }
 function updateBadge() {
   const pick = (acc.match(/採用案[^A-Z]*([A-F])/) || [])[1];
@@ -46,11 +79,13 @@ function connect() {
     if (msg.type === 'reset') resetOutput();
     else if (msg.type === 'out') {
       acc += msg.text;
+      if (!msg.prefix) removeGen(); // モデル本文が出始めたらインジケーターを消す
       renderOutput();
       updateBadge();
     } else if (msg.type === 'done') {
       renderOutput();
       updateBadge();
+      removeGen();
       setBusy(false);
     }
   };
@@ -134,6 +169,7 @@ function renderValues() {
     row.querySelector('.slider__val').textContent = v;
     const input = row.querySelector('input');
     if (Number(input.value) !== v) input.value = v;
+    input.style.setProperty('--pct', `${v}%`); // 値に応じてトラックをミントで満たす
     row.classList.toggle('is-dominant', uniqueMax && v === max && max > 0);
   }
 }
@@ -171,7 +207,7 @@ function showTopic() {
   const t = state.topics.find((x) => x.id === state.topicId);
   els.badge.textContent = '';
   els.output.innerHTML = t
-    ? `<div class="topic-view">${marked.parse(t.body)}</div>`
+    ? `<div class="topic-view">${marked.parse(t.body)}</div><div class="result-view" id="result"></div>`
     : '<div class="placeholder">お題を選んでください。</div>';
   els.output.scrollTop = 0;
 }
